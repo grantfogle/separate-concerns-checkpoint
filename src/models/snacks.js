@@ -11,6 +11,8 @@ function getOne(id) {
 }
 
 function createSnack({ name, price, quantity, type }) {
+    let response
+    const errors = []
     let newSnack = {
         name,
         id: uuid(),
@@ -18,23 +20,40 @@ function createSnack({ name, price, quantity, type }) {
         quantity,
         type
     }
+    if (!name || !price || !quantity || !type) {
+        errors.push('pls complete all fields')
+        return response = { errors }
+    }
     snacks.push(newSnack)
-    console.log(snacks)
     return newSnack
 
 }
 function editSnack(id, quantity) {
-    let editedSnack = {}
-    snacks.map(snack => {
-        if (snack.id === id) {
-            snack.quantity = quantity
-            editedSnack = snack
-        }
-    })
-    return editedSnack
+    let response
+    const errors = []
+    if (!quantity) {
+        errors.push("Pls add quantity")
+        return response = { errors }
+    } else {
+        snacks.map(snack => {
+            if (snack.id === id) {
+                snack.quantity = quantity
+                response = snack
+            }
+        })
+    }
+
+    if (!response) {
+        errors.push("Id doesn't exist")
+        return response = { errors }
+    }
+    return response
 }
 
 function deleteSnack(id) {
+    let response
+    const errors = ['id doesnt exist']
+
     for (let i = 0; i < snacks.length; i++) {
         if (snacks[i].id === id) {
             return (
@@ -43,6 +62,7 @@ function deleteSnack(id) {
             )
         }
     }
+    return response = { errors }
 }
 
 module.exports = { getAll, getOne, createSnack, editSnack, deleteSnack }
