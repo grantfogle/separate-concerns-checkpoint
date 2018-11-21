@@ -14,12 +14,14 @@ function getOne(req, res, next) {
 
 function createSnack(req, res, next) {
     const { body } = req.body
-    dcreateSnack(body)
-    return res.status
+    const newSnack = model.createSnack(body)
+    return res.status(201).json(newSnack)
     console.log('createSnack')
 }
 
 function editSnack(req, res, next) {
+    const info = req.body;
+    const editSnack = '';
     console.log('editSnack')
 }
 

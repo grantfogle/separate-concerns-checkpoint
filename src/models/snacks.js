@@ -10,6 +10,18 @@ function getOne(id) {
     return snacks.filter(snack => snack.id === id)[0];
 }
 
+function createSnack({ name, price, quantity, type }) {
+    let newSnack = {
+        name,
+        id: uuid(),
+        price,
+        quantity,
+        type
+    }
+    snacks.push(newSnack)
+    return newSnack;
+
+}
 // function create() {
 
 // }
