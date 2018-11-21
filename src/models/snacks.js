@@ -6,8 +6,14 @@ function getAll() {
     return snacks;
 }
 function getOne(id) {
-    console.log('models: ', snacks)
-    return snacks.filter(snack => snack.id === id)[0];
+    let response
+    const errors = ['id doesn\'t exist']
+    let singleSnack = snacks.filter(snack => snack.id === id)[0];
+    if (singleSnack) {
+        return singleSnack;
+    }
+    return response = { errors }
+
 }
 
 function createSnack({ name, price, quantity, type }) {
