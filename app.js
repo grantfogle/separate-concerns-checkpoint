@@ -11,6 +11,21 @@ const db = require('./db/snacks')
 app.use(bodyParser.json())
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 
+//sets us up to our routes
+const snackRoutes = require('./src/routes/snacks')
+// console.log(snackRoutes)
+app.use('/snacks', snackRoutes)
+
+//error handlers
+app.use((err, req, res, next) => {
+    console.error(err)
+    const status = err.status || 500
+    res.status(status).json({ error: err })
+})
+
+app.use((req, res, next) => {
+    res.status(404).json({ error: { message: 'Not found' } })
+})
 
 //get controllers, other routes
 const listener = () => console.log(`Listening on port ${port}!`)
