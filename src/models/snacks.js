@@ -19,11 +19,30 @@ function createSnack({ name, price, quantity, type }) {
         type
     }
     snacks.push(newSnack)
-    return newSnack;
+    console.log(snacks)
+    return newSnack
 
 }
-// function create() {
+function editSnack(id, quantity) {
+    let editedSnack = {}
+    snacks.map(snack => {
+        if (snack.id === id) {
+            snack.quantity = quantity
+            editedSnack = snack
+        }
+    })
+    return editedSnack
+}
 
-// }
+function deleteSnack(id) {
+    for (let i = 0; i < snacks.length; i++) {
+        if (snacks[i].id === id) {
+            return (
+                snacks[i],
+                snacks.splice(i, 1)
+            )
+        }
+    }
+}
 
-module.exports = { getAll, getOne, createSnack }
+module.exports = { getAll, getOne, createSnack, editSnack, deleteSnack }

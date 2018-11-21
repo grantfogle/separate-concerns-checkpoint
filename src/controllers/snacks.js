@@ -13,20 +13,24 @@ function getOne(req, res, next) {
 }
 
 function createSnack(req, res, next) {
-    const { body } = req.body
-    const newSnack = model.createSnack(body)
+    const obj = req.body
+    const newSnack = model.createSnack(obj)
     return res.status(201).json(newSnack)
     console.log('createSnack')
 }
 
 function editSnack(req, res, next) {
-    const info = req.body;
-    const editSnack = '';
+    const { id } = req.params
+    const { quantity } = req.body
+    const editedSnack = model.editSnack(id, quantity)
+    return res.status(201).json(editedSnack)
     console.log('editSnack')
 }
 
 function deleteSnack(req, res, next) {
-    console.log('deleteSnack')
+    const { id } = req.params
+    const deletedSnack = model.deleteSnack(id)
+    return res.status(200).json(deletedSnack)
 }
 
 module.exports = { getAll, getOne, createSnack, deleteSnack, editSnack }
